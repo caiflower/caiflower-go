@@ -7,6 +7,10 @@ type Man struct {
 }
 
 func main() {
+	test2()
+}
+
+func test1() {
 	var manArray [2]Man
 	manArray[0] = Man{Age: 10}
 	manArray[1] = Man{Age: 10}
@@ -36,6 +40,16 @@ func changeSliceAge(mans []Man) {
 
 func changeManArray(mans [2]Man) {
 	mans[1].Age = 30
+}
+
+func test2() {
+	// 验证slice[xx:xx]是和原来的切片共用一片内存地址的
+	slice := []int{1, 2, 3, 4}
+	slice1 := slice[0 : len(slice)-1]
+	slice1[0] = 5
+
+	fmt.Printf("%v\n", slice)
+	fmt.Printf("%v\n", slice1)
 }
 
 //func test(namespace string, arr []string) bool {

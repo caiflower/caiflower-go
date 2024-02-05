@@ -1,0 +1,13 @@
+---
+apiVersion: caiflower.cn/v1
+kind: Student
+metadata:
+  name: student-sample-v1
+  namespace: lijinlong
+spec:
+  name: lijinlong100
+  age: 123
+  score:
+    math: 90
+    english: 80
+    chinese: 70

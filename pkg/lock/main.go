@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+
+}
+
+func testBlock() {
 	mutex := sync.Mutex{}
 	ch := make(chan int)
 
