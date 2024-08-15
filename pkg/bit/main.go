@@ -1,8 +1,8 @@
 package main
 
 const (
-	jcsGwRunning = 1
-	rmsGwRunning = 2
+	jRunning = 1
+	rRunning = 2
 )
 
 type Heartbeat struct {
@@ -11,21 +11,21 @@ type Heartbeat struct {
 
 func main() {
 	h := &Heartbeat{}
-	h.setHeartBeatRunning(jcsGwRunning)
-	if !h.IsRunning(jcsGwRunning) || h.IsRunning(rmsGwRunning) {
+	h.setHeartBeatRunning(jRunning)
+	if !h.IsRunning(jRunning) || h.IsRunning(rRunning) {
 		panic("jcs not running or rms is running")
 	}
-	h.setHeartBeatRunning(rmsGwRunning)
-	if !h.IsRunning(rmsGwRunning) || !h.IsRunning(jcsGwRunning) {
+	h.setHeartBeatRunning(rRunning)
+	if !h.IsRunning(rRunning) || !h.IsRunning(jRunning) {
 		panic("jcs is not running or rms is not running")
 	}
 
-	h.setHeartBeatStopped(rmsGwRunning)
-	if h.IsRunning(rmsGwRunning) || !h.IsRunning(jcsGwRunning) {
+	h.setHeartBeatStopped(rRunning)
+	if h.IsRunning(rRunning) || !h.IsRunning(jRunning) {
 		panic("jcs not running or rms is running")
 	}
-	h.setHeartBeatStopped(jcsGwRunning)
-	if h.IsRunning(jcsGwRunning) || h.IsRunning(jcsGwRunning) {
+	h.setHeartBeatStopped(jRunning)
+	if h.IsRunning(jRunning) || h.IsRunning(jRunning) {
 		panic("jcs is running or rms is running")
 	}
 }
