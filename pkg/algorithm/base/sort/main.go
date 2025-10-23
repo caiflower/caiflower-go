@@ -18,11 +18,7 @@ func main() {
 	items[3] = item{key: "test3", value: 3}
 
 	sort.Slice(items, func(i, j int) bool {
-		if items[i].value < items[j].value {
-			return true
-		} else {
-			return false
-		}
+		return items[i].value < items[j].value
 	})
 
 	for _, v := range items {

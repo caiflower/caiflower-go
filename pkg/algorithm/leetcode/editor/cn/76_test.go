@@ -1,6 +1,9 @@
 package leetcode
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 //给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
 //
@@ -56,7 +59,7 @@ import "fmt"
 //
 // Related Topics 哈希表 字符串 滑动窗口 👍 3419 👎 0
 
-func Test76() {
+func Test76(t *testing.T) {
 	type testCase struct {
 		s, t     string
 		expected string
@@ -69,17 +72,16 @@ func Test76() {
 		{"aa", "aa", "aa"},
 		{"a", "b", ""},
 		{"a", "", ""},
+		{"ab", "a", "a"},
+		{"cabwefgewcwaefgcf", "cae", "cwae"},
 	}
 	for i, tc := range cases {
-		result := minWindow(tc.s, tc.t)
-		fmt.Printf("Test Case %d: s=%q, t=%q\n", i+1, tc.s, tc.t)
-		fmt.Printf("Output: %q, Expected: %q\n", result, tc.expected)
-		if result == tc.expected {
-			fmt.Println("PASS")
-		} else {
-			fmt.Println("FAIL")
-		}
-		fmt.Println()
+		t.Run(fmt.Sprintf("Case %d: s=%q, t=%q", i+1, tc.s, tc.t), func(t *testing.T) {
+			result := minWindow(tc.s, tc.t)
+			if result != tc.expected {
+				t.Errorf("输出: %q, 期望: %q", result, tc.expected)
+			}
+		})
 	}
 }
 

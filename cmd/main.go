@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"encoding/base64"
 	"fmt"
 	"image"
@@ -21,13 +20,7 @@ const (
 )
 
 func main() {
-	ctx := context.WithValue(context.Background(), "test1", 1)
-	ctx = context.WithValue(ctx, "test2", 2)
-	ctx = context.WithValue(ctx, "test3", 3)
-
-	fmt.Println(ctx.Value("test1"))
-	fmt.Println(ctx.Value("test2"))
-	fmt.Println(ctx.Value("test3"))
+	testDiskSymbol()
 }
 
 func getPcieTopologyFromSysFile() (map[string][]string, error) {
@@ -205,4 +198,10 @@ func decodePPM(data []byte) (image.Image, error) {
 		}
 	}
 	return img, nil
+}
+
+func testDiskSymbol() {
+	str := "vda,vdb,vdc,vdd,vde,vdf,vdg,vdh,vdi,vdj,vdk,vdl,vdm,vdn,vdo,vdp,vdq,vdr,vds,vdt,vdu,vdv,vdw,vdx,vdy,vdz,vdaa,vdab,vdac,vdad,vdae,vdaf,vdag,vdah,vdai,vdaj,vdak,vdal,vdam,vdan,vdao,vdap,vdaq,vdar,vdas,vdat,vdau,vdav,vdaw,vdax,vday,vdaz,vdba,vdbb,vdbc,vdbd,vdbe,vdbf,vdbg,vdbh,vdbi,vdbj,vdbk,vdbl,vdbm"
+	slice := strings.Split(str, ",")
+	fmt.Println(len(slice))
 }

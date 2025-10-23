@@ -8,6 +8,7 @@ require (
 	github.com/go-logr/logr v1.4.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/panjf2000/ants/v2 v2.9.0
+	github.com/stretchr/testify v1.9.0
 	github.com/tmaxmax/go-sse v0.11.0
 	go.uber.org/mock v0.5.0
 	golang.org/x/crypto v0.24.0
@@ -47,6 +48,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_golang v1.18.0 // indirect
 	github.com/prometheus/client_model v0.5.0 // indirect
 	github.com/prometheus/common v0.45.0 // indirect

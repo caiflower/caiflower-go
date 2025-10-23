@@ -3,6 +3,7 @@ package leetcode
 import (
 	"fmt"
 	"math"
+	"testing"
 )
 
 //Given an array of positive integers nums and a positive integer target,
@@ -49,7 +50,7 @@ import (
 //
 // Related Topics 数组 二分查找 前缀和 滑动窗口 👍 2536 👎 0
 
-func Test209() {
+func Test209(t *testing.T) {
 	// Example 1
 	target1 := 7
 	nums1 := []int{2, 3, 1, 2, 4, 3}
