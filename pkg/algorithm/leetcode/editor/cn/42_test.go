@@ -299,7 +299,7 @@ func trap1(height []int) int {
 
 // 双指针法，从左右两边开始遍历，每次移动高度小的指针（因为接水的时候关心的是矮的柱子），并更新最大高度，如果当前高度小于最大高度，则可以接雨水，累加到结果中。
 // 时间复杂度：O(n)，空间复杂度：O(1)
-func trap(height []int) int {
+func trap2(height []int) int {
 	if 0 == len(height) {
 		return 0
 	}
@@ -322,6 +322,33 @@ func trap(height []int) int {
 			rv = max(rv, height[r])
 			r--
 		}
+	}
+
+	return ans
+}
+
+// 单调栈写法
+// 单调递减栈求雨水，相对复杂，不太好想出来，建议用示例2来想着写
+// 时间复杂度O(n), 空间复杂度O(n)
+func trap(height []int) int {
+	if height == nil || len(height) == 0 {
+		return 0
+	}
+
+	s := intStack{}
+	ans := 0
+
+	for i := 0; i < len(height); i++ {
+		tmp := 0
+		for s.Size() > 0 && height[i] >= s.Peek()[1] {
+			t := s.Pop()
+			if s.Size() > 0 {
+				tmp += (i - s.Peek()[0] - 1) * (min(s.Peek()[1], height[i]) - t[1])
+			}
+		}
+
+		ans += tmp
+		s.Push([2]int{i, height[i]})
 	}
 
 	return ans
