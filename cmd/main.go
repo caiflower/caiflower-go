@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func longestCommonSubsequence(text1 string, text2 string) int {
 	len1, len2 := len(text1), len(text2)
 	dp := make([][]int, len1+1)
@@ -36,7 +38,21 @@ func breakPalindrome(palindrome string) string {
 	return palindrome[:len(palindrome)-1] + "b"
 }
 
+func testSlice() {
+	arr := [10]int{}
+	s := arr[0:5]
+	s = append(s, 1, 2, 3, 4, 5)
+	fmt.Println(s)
+	fmt.Println(arr)
+	fmt.Println("--------")
+	s = append(s, 6)
+	fmt.Println(s)
+	fmt.Println(arr)
+	fmt.Println(cap(s))
+}
+
 func main() {
 	//fmt.Println(longestCommonSubsequence("abcde", "ace"))
 
+	testSlice()
 }
