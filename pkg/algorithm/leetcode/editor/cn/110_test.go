@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -85,7 +86,29 @@ func Test110(t *testing.T) {
  * }
  */
 func isBalanced(root *TreeNode) bool {
-	return false
+	_, b := balance(root)
+	return b
+}
+
+func balance(root *TreeNode) (int, bool) {
+	if root == nil {
+		return 0, true
+	}
+
+	d1, b1 := balance(root.Left)
+	if !b1 {
+		return 0, false
+	}
+	d2, b2 := balance(root.Right)
+	if !b2 {
+		return 0, false
+	}
+
+	if int(math.Abs(float64(d1-d2))) > 1 {
+		return max(d1+1, d2+1), false
+	} else {
+		return max(d1+1, d2+1), true
+	}
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
