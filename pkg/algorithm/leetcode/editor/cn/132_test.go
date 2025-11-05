@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -62,6 +63,7 @@ func Test132(t *testing.T) {
 		{name: "abababa", want: 0, cast: "abababa"},
 		{name: "ababab", want: 1, cast: "ababab"},
 		{name: "cdd", want: 1, cast: "cdd"},
+		{name: "cabababcbc", want: 3, cast: "cabababcbc"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -73,18 +75,15 @@ func Test132(t *testing.T) {
 
 // leetcode submit region begin(Prohibit modification and deletion)
 func minCut(s string) int {
+	n := len(s)
 	if s == "" {
 		return 0
 	}
 	cursor := make([][]bool, 0)
-	dp := make([][]int, 0)
 	for i := 0; i < len(s); i++ {
 		t := make([]bool, len(s))
-		t1 := make([]int, len(s))
 		t[i] = true
-		t1[i] = 0
 		cursor = append(cursor, t)
-		dp = append(dp, t1)
 	}
 
 	for i := 0; i < len(s); i++ {
@@ -92,15 +91,23 @@ func minCut(s string) int {
 			if (j+1 > i-1 || cursor[j+1][i-1] == true) && s[i] == s[j] {
 				cursor[j][i] = true
 			}
-			if cursor[j][i] == true {
-				dp[j][i] = 0
-			} else {
-				dp[j][i] = min(dp[j][i-1]+1, dp[j+1][i]+1)
-			}
 		}
 	}
 
-	return dp[0][len(s)-1]
+	// 这里是难点
+	f := make([]int, n)
+	for i := range f {
+		if cursor[0][i] {
+			continue
+		}
+		f[i] = math.MaxInt64
+		for j := 0; j < i; j++ {
+			if cursor[j+1][i] && f[j]+1 < f[i] {
+				f[i] = f[j] + 1
+			}
+		}
+	}
+	return f[n-1]
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
