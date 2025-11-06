@@ -40,6 +40,96 @@ import (
 // Related Topics 树 深度优先搜索 二叉搜索树 二叉树 👍 1020 👎 0
 
 func Test669(t *testing.T) {
+	tests := []struct {
+		name string
+		root *TreeNode
+		low  int
+		high int
+		want *TreeNode
+	}{
+		{
+			name: "示例1",
+			root: &TreeNode{
+				Val:   1,
+				Left:  &TreeNode{Val: 0},
+				Right: &TreeNode{Val: 2},
+			},
+			low:  1,
+			high: 2,
+			want: &TreeNode{
+				Val:   1,
+				Left:  nil,
+				Right: &TreeNode{Val: 2},
+			},
+		},
+		{
+			name: "示例2",
+			root: &TreeNode{
+				Val: 3,
+				Left: &TreeNode{
+					Val: 0,
+					Right: &TreeNode{
+						Val:  2,
+						Left: &TreeNode{Val: 1},
+					},
+				},
+				Right: &TreeNode{Val: 4},
+			},
+			low:  1,
+			high: 3,
+			want: &TreeNode{
+				Val: 3,
+				Left: &TreeNode{
+					Val:  2,
+					Left: &TreeNode{Val: 1},
+				},
+				Right: nil,
+			},
+		},
+		{
+			name: "空树",
+			root: nil,
+			low:  1,
+			high: 3,
+			want: nil,
+		},
+		{
+			name: "全部节点都在范围外",
+			root: &TreeNode{
+				Val:   5,
+				Left:  &TreeNode{Val: 4},
+				Right: &TreeNode{Val: 6},
+			},
+			low:  1,
+			high: 3,
+			want: nil,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := trimBST(tt.root, tt.low, tt.high)
+			// 这里需要一个比较二叉树是否相同的函数
+			// 简化处理，实际使用时可能需要更复杂的比较逻辑
+			if !isSameTree(got, tt.want) {
+				t.Errorf("trimBST() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+// 辅助函数：判断两棵树是否相同
+func isSameTree(p *TreeNode, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	if p.Val != q.Val {
+		return false
+	}
+	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
 }
 
 //leetcode submit region begin(Prohibit modification and deletion)
