@@ -36,6 +36,63 @@ import "testing"
 // Related Topics 数组 二分查找 👍 1815 👎 0
 
 func Test704(t *testing.T) {
+	tests := []struct {
+		name   string
+		nums   []int
+		target int
+		want   int
+	}{
+		{
+			name:   "示例1",
+			nums:   []int{-1, 0, 3, 5, 9, 12},
+			target: 9,
+			want:   4,
+		},
+		{
+			name:   "示例2",
+			nums:   []int{-1, 0, 3, 5, 9, 12},
+			target: 2,
+			want:   -1,
+		},
+		{
+			name:   "边界情况-只有一个元素且匹配",
+			nums:   []int{5},
+			target: 5,
+			want:   0,
+		},
+		{
+			name:   "边界情况-只有一个元素不匹配",
+			nums:   []int{5},
+			target: 6,
+			want:   -1,
+		},
+		{
+			name:   "边界情况-目标值在数组最左边",
+			nums:   []int{1, 2, 3, 4, 5},
+			target: 1,
+			want:   0,
+		},
+		{
+			name:   "边界情况-目标值在数组最右边",
+			nums:   []int{1, 2, 3, 4, 5},
+			target: 5,
+			want:   4,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// 测试 search 函数
+			if got := search(tt.nums, tt.target); got != tt.want {
+				t.Errorf("search() = %v, want %v", got, tt.want)
+			}
+
+			// 测试 search1 函数
+			if got := search1(tt.nums, tt.target); got != tt.want {
+				t.Errorf("search1() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
 
 // leetcode submit region begin(Prohibit modification and deletion)
