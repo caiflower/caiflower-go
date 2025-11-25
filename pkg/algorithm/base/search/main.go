@@ -10,10 +10,10 @@ func main() {
 	//fmt.Println(index)
 
 	nums := []int{0, 1, 2, 3, 5, 6, 7}
-	fmt.Println(binarySearchSort(nums, 0))
-	fmt.Println(binarySearchSort(nums, 5))
-	fmt.Println(binarySearchSort(nums, 7))
-	fmt.Println(binarySearchSort(nums, 9))
+	fmt.Println(binarySearchSort(nums, 0) == binarySearch(nums, 0))
+	fmt.Println(binarySearchSort(nums, 5) == binarySearch(nums, 5))
+	fmt.Println(binarySearchSort(nums, 7) == binarySearch(nums, 7))
+	fmt.Println(binarySearchSort(nums, 9) == binarySearch(nums, 9))
 }
 
 func binarySearchSort(nums []int, target int) int {
@@ -34,7 +34,7 @@ func binarySearchSort(nums []int, target int) int {
 }
 
 func binarySearch(arr []int, target int) int {
-	l, r := 0, len(arr)-1
+	l, r := 0, len(arr)
 	for l < r {
 		m := (l + r) / 2
 		if arr[m] < target {
@@ -42,6 +42,10 @@ func binarySearch(arr []int, target int) int {
 		} else {
 			r = m
 		}
+	}
+
+	if l >= len(arr) {
+		return -1
 	}
 
 	return l
